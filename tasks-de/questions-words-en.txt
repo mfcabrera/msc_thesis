@@ -6404,7 +6404,6 @@ uncle aunt sons daughters
 uncle aunt stepbrother stepsister
 uncle aunt stepfather stepmother
 uncle aunt stepson stepdaughter
-: gram1-adjective-to-adverb
 : gram2-opposite
 acceptable unacceptable aware unaware
 acceptable unacceptable certain uncertain
@@ -9674,7 +9673,6 @@ young youngest warm warmest
 young youngest weak weakest
 young youngest weird weirdest
 young youngest wide widest
-: gram5-present-participle
 : gram6-nationality-adjective
 Albania Albanian Argentina Argentinean
 Albania Albanian Australia Australian
