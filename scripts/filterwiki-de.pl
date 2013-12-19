@@ -46,16 +46,16 @@ while (<>) {
     s/ä/ae/g; # change characters to test
     s/ö/oe/g;
     s/ü/ue/g;
-    s/0/ zero /g;
-    s/1/ one /g;
-    s/2/ two /g;
-    s/3/ three /g;
-    s/4/ four /g;
-    s/5/ five /g;
-    s/6/ six /g;
-    s/7/ seven /g;
-    s/8/ eight /g;
-    s/9/ nine /g;
+    s/0/ null /g;
+    s/1/ eins /g;
+    s/2/ zwei /g;
+    s/3/ drei /g;
+    s/4/ vier /g;
+    s/5/ fuenf /g;
+    s/6/ sechs /g;
+    s/7/ sieben /g;
+    s/8/ acht /g;
+    s/9/ neun /g;
     tr/a-z/ /cs;
     chop;
     print $_;
