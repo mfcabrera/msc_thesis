@@ -40,7 +40,8 @@ filename =  sys.argv[1]
 
 print "Processing file: %s " %  filename
 
-stemmer = nltk.stem.snowball.GermanStemmer(True)
+
+#stemmer = nltk.stem.snowball.GermanStemmer(True)
 
 #hackish to avoid tjhe removal of the follwing ending
 #that are semantically important:
@@ -52,13 +53,19 @@ stemmer = nltk.stem.snowball.GermanStemmer(True)
 #Out[11]: (u'isch', u'lich', u'heit', u'keit', u'end', u'ung', u'ig', u'ik')
 
 
-stemmer._GermanStemmer__step3_suffixes = ()
-stemmer._GermanStemmer__step2_suffixes = ()
+#stemmer._GermanStemmer__step3_suffixes = ()
+#stemmer._GermanStemmer__step2_suffixes = ()
+
+#nationality 
+regex = 'schen$|schem$|scher$|sche$|sches$'
+
+p = re.compile(regex)
+
 
 
 for word in delimited(filename):
     if len(word) > 1:
-        sys.stdout.write(stemmer.stem(word))
+        sys.stdout.write(p.sub('sch',word))
         sys.stdout.write(' ')
 
 
