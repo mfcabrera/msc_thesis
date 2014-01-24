@@ -52,8 +52,8 @@ stemmer = nltk.stem.snowball.GermanStemmer(True)
 #Out[11]: (u'isch', u'lich', u'heit', u'keit', u'end', u'ung', u'ig', u'ik')
 
 
-stemmer._GermanStemmer__step3_suffixes = ()
-stemmer._GermanStemmer__step2_suffixes = ()
+#stemmer._GermanStemmer__step3_suffixes = ()
+#stemmer._GermanStemmer__step2_suffixes = ()
 
 
 for word in delimited(filename):
