@@ -30,7 +30,7 @@ print args
 
 with open(args.parameter_file,'r') as input:
     runs = json.load(input)
-    print runs
+    #print runs
     for run_code in runs:
         print "Procesing %s " % run_code
 

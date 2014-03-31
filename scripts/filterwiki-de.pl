@@ -46,6 +46,7 @@ while (<>) {
     s/ä/ae/g; # change characters to test
     s/ö/oe/g;
     s/ü/ue/g;
+    s/ß/ss/g;
     s/0/ null /g;
     s/1/ eins /g;
     s/2/ zwei /g;
