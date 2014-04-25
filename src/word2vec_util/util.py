@@ -2,6 +2,8 @@ import numpy as np
 import json
 from os import listdir
 from os.path import isfile, join
+from nltk.corpus import stopwords
+import cPickle as pickle
 
 
 def load_word2vec_vocab(path):
@@ -24,25 +26,25 @@ def load_word2vec_vocab(path):
     return vocab
 
 # let's define a method to do this:
-def get_doc_vector(vector, model):
+def get_doc_vector(vector, word_vectors):
     """ Returns the docter the word vector mean representation"""
     idx = vector.todense() == 1 
-    doc_matrix = model.syn0[np.array(idx.flat)]
+    doc_matrix = word_vectors[np.array(idx.flat)]
     
     return np.mean(doc_matrix,axis=0)
 
 
 #Let's define a funciton to create 
-def create_data_vectors(data, word_model):
+def create_data_vectors(data, word_vectors):
     """ Create data vectors from a binary term vector  
         data: a binary term vector representation of the documents. One row per document.
         word_mode: the word2vec wordvector model to get the wordvector from
     """
-    data_dense  = np.zeros((data.shape[0],word_model.syn0.shape[1]))
+    data_dense  = np.zeros((data.shape[0],word_vectors.shape[1]))
     #get the document vectors
     for i,item  in enumerate(data):
         #print("What? %d" % i)
-        data_dense[i] = get_doc_vector(item,word_model)
+        data_dense[i] = get_doc_vector(item,word_vectors)
         
         #if(  (np.isfinite(data_dense[i]).all()) ):
             #print (documents[i])
@@ -95,6 +97,21 @@ def load_documents_and_labels(data_dir, categories):
     return documents, labels, files_cat
     
     
+def load_gini_stop_words(additional_stop_words_file):
+    """ Load gini stop words for the German language and append the NLTK stop word list
+    returns: a list of the gini stop words and the NLTK stop words with the special german character
+    scaped. """
+    
+    gini_stop_words = pickle.load(open(additional_stop_words_file))
+    nltk_stop_words = stopwords.words('german')
+
+    final_stopwords = map(lambda x:  
+                          x.replace('\xc3\xb6','oe')
+                          .replace('\xc3\xbc','ue')
+                          .replace('\xc3\xa4','ae') 
+                          .replace('\xc3\x9f', 'ss')
+                          , nltk_stop_words)
+    
 
 
 
@@ -112,3 +129,5 @@ if __name__ == '__main__':
 
     print("Let's test something")
  
+
+
