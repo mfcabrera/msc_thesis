@@ -26,16 +26,19 @@ def load_word2vec_vocab(path):
     return vocab
 
 # let's define a method to do this:
-def get_doc_vector(vector, word_vectors):
+def get_doc_vector(vector, word_vectors, mean=True):
     """ Returns the docter the word vector mean representation"""
     idx = vector.todense() == 1 
     doc_matrix = word_vectors[np.array(idx.flat)]
+    if mean:
+        return np.mean(doc_matrix, axis=0)
+    else:
+        return np.sum(doc_matrix, axis=0)
     
-    return np.mean(doc_matrix,axis=0)
 
 
 #Let's define a funciton to create 
-def create_data_vectors(data, word_vectors):
+def create_data_vectors(data, word_vectors, mean=True):
     """ Create data vectors from a binary term vector  
         data: a binary term vector representation of the documents. One row per document.
         word_mode: the word2vec wordvector model to get the wordvector from
@@ -44,7 +47,7 @@ def create_data_vectors(data, word_vectors):
     #get the document vectors
     for i,item  in enumerate(data):
         #print("What? %d" % i)
-        data_dense[i] = get_doc_vector(item,word_vectors)
+        data_dense[i] = get_doc_vector(item, word_vectors, mean=mean)
         
         #if(  (np.isfinite(data_dense[i]).all()) ):
             #print (documents[i])
